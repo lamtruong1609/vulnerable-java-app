@@ -1,0 +1,23 @@
+stages: 
+  # after build stage
+  - security
+
+security:
+  stage: security
+  allow_failure: true
+  trigger:
+    include:
+    # Path to the shared repo
+      - project: 'whitespots-public/pipelines'
+        # a proper branch name
+        ref: 'main'
+        file: 'pipelines.yml'
+  variables:
+
+    # Secrets settings
+    SEC_SECRETS_SCAN_ENABLE: "true"
+
+    # SAST settings
+    SEC_SAST_ENABLE: "true"
+    SEC_JAVA: "true"
+  
